@@ -1,0 +1,6 @@
+if [ -f ~/.dotfiles/bash/bashrc ]; then
+   source ~/.dotfiles/bash/bashrc
+fi
+export EDITOR=vim
+export TERM=xterm-256color
+export PATH+=:/usr/local/git/bin
