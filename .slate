@@ -1,0 +1,16 @@
+# Configs
+config orderScreensLeftToRight true
+
+# Monitor Aliases
+alias mon-asus 0 
+alias mon-samsung-tv 1
+
+# Position Aliases
+alias 1-full move screenOriginX;screenOriginY   screenSizeX;screenSizeY ${mon-asus}
+alias 2-full move screenOriginX;screenOriginY   screenSizeX;screenSizeY ${mon-samsung-tv}
+
+# Basic location bindings
+bind q:ctrl ${1-full} 0
+bind w:ctrl ${2-full} 1
+bind a:ctrl push left bar-resize:screenSizeX/2
+bind s:ctrl push right bar-resize:screenSizeX/2
