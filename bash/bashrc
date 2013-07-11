@@ -5,7 +5,6 @@ export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
 alias ls='ls -Gl'
 alias la='ls -Gla'
 export PS1='[\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$(__git_ps1 " (%s)")\[\033[0m\]] '
-alias vim='mvim -v'
 
 if [ -n "$SSH_CLIENT" ]; then
     export PS1='[\u\[\033[0m\]@\[\033[0;31m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$(__git_ps1 " (%s)")\[\033[0m\]] '
