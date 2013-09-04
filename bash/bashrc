@@ -1,11 +1,16 @@
-source ~/.dotfiles/bash/git-prompt.sh
 export TERM='xterm-256color'
 export CLICOLOR=1
 export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
-alias ls='ls -Gl'
-alias la='ls -Gla'
-export PS1='[\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$(__git_ps1 " (%s)")\[\033[0m\]] '
+alias ls='ls -lh'
+alias ld='ls -o'
+alias lg='ls -g'
+alias la='ls -GA'
+alias ll='ls -clt'
 
-if [ -n "$SSH_CLIENT" ]; then
-    export PS1='[\u\[\033[0m\]@\[\033[0;31m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$(__git_ps1 " (%s)")\[\033[0m\]] '
-fi
+source ./.bash-powerline.sh
+
+#export PS1='[\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$)\[\033[0m\]] '
+
+#if [ -n "$SSH_CLIENT" ]; then
+    #export PS1='[\u\[\033[0m\]@\[\033[0;31m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$(__git_ps1 " (%s)")\[\033[0m\]] '
+#fi
