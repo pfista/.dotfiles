@@ -1,11 +1,24 @@
 export TERM='xterm-256color'
-export CLICOLOR=1
+export CLICOLORS=1
 export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
-alias ls='ls -lh --color=auto'
-alias ld='ls -o --color=auto'
-alias lg='ls -g --color=auto'
-alias la='ls -GA --color=auto'
-alias ll='ls -clt --color=auto'
+
+# Set aliases based on system
+case $(uname -s) in
+    Darwin|FreeBSD)
+        alias ls='ls -lh'
+        alias ld='ls -o'
+        alias lg='ls -g'
+        alias la='ls -GA'
+        alias ll='ls -clt'
+    ;;
+    Linux)
+        alias ls='ls -lh --color=auto'
+        alias ld='ls -o --color=auto'
+        alias lg='ls -g --color=auto'
+        alias la='ls -GA --color=auto'
+        alias ll='ls -clt --color=auto'
+    ;;
+esac
 
 source ~/.dotfiles/bash/.bash-powerline.sh
 
