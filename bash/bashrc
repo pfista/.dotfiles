@@ -1,13 +1,13 @@
 export TERM='xterm-256color'
 export CLICOLOR=1
 export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
-alias ls='ls -lh'
-alias ld='ls -o'
-alias lg='ls -g'
-alias la='ls -GA'
-alias ll='ls -clt'
+alias ls='ls -lh --color=auto'
+alias ld='ls -o --color=auto'
+alias lg='ls -g --color=auto'
+alias la='ls -GA --color=auto'
+alias ll='ls -clt --color=auto'
 
-source ./.bash-powerline.sh
+source ~/.dotfiles/bash/.bash-powerline.sh
 
 #export PS1='[\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$)\[\033[0m\]] '
 
