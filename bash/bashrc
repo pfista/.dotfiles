@@ -22,6 +22,8 @@ esac
 
 source ~/.dotfiles/bash/.bash-powerline.sh
 
+set -o vi
+
 #export PS1='[\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;34m\]\w\[\033[35m\]$)\[\033[0m\]] '
 
 #if [ -n "$SSH_CLIENT" ]; then
