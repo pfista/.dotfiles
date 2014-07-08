@@ -93,6 +93,16 @@ __powerline() {
             PS_SYMBOL=$PS_SYMBOL_OTHER
     esac
 
+    __set_virtualenv () {
+      if test -z "$VIRTUAL_ENV" ; then
+          PYTHON_VIRTUALENV=""
+      else
+          PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+          printf " $PYTHON_VIRTUALENV"
+      fi
+    }
+
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
@@ -103,6 +113,7 @@ __powerline() {
         fi
 
         PS1="$BG_BASE1$FG_BASE3 \w $RESET"
+        PS1+="$BG_RED$FG_BASE3$(__set_virtualenv)$RESET"
         PS1+="$BG_BLUE$FG_BASE3$(__git_branch)$RESET"
         PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
     }
