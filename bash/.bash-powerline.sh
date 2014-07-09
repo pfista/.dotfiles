@@ -106,7 +106,6 @@ __powerline() {
         printf " $BG_BLUE$FG_DARK$GIT_BRANCH_SYMBOL$branch$marks "
     }
 
-
     case "$(uname)" in
         Darwin)
             PS_SYMBOL=$PS_SYMBOL_DARWIN
@@ -117,6 +116,16 @@ __powerline() {
         *)
             PS_SYMBOL=$PS_SYMBOL_OTHER
     esac
+
+    __set_virtualenv () {
+      if test -z "$VIRTUAL_ENV" ; then
+          PYTHON_VIRTUALENV=""
+      else
+          PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+          printf " $PYTHON_VIRTUALENV"
+      fi
+    }
+
 
     ps1() {
         # Check the exit code of the previous command and display different
