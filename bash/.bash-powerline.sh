@@ -11,6 +11,8 @@ __powerline() {
     GIT_NEED_PUSH_SYMBOL='⇡'
     GIT_NEED_PULL_SYMBOL='⇣'
 
+    SEPARATOR_RIGHT=''
+
     # Solarized colorscheme
     FG_BASE03="\[$(tput setaf 8)\]"
     FG_BASE02="\[$(tput setaf 0)\]"
@@ -30,35 +32,56 @@ __powerline() {
     BG_BASE2="\[$(tput setab 7)\]"
     BG_BASE3="\[$(tput setab 15)\]"
 
-    FG_YELLOW="\[$(tput setaf 3)\]"
-    FG_ORANGE="\[$(tput setaf 9)\]"
-    FG_RED="\[$(tput setaf 1)\]"
-    FG_MAGENTA="\[$(tput setaf 5)\]"
-    FG_VIOLET="\[$(tput setaf 13)\]"
-    FG_BLUE="\[$(tput setaf 4)\]"
-    FG_CYAN="\[$(tput setaf 6)\]"
-    FG_GREEN="\[$(tput setaf 2)\]"
+    FG_YELLOW="\[$(tput setaf 227)\]"
+    FG_ORANGE="\[$(tput setaf 208)\]"
+    FG_RED="\[$(tput setaf 124)\]"
+    FG_MAGENTA="\[$(tput setaf 54)\]"
+    FG_VIOLET="\[$(tput setaf 63)\]"
+    FG_BLUE="\[$(tput setaf 26)\]"
+    FG_CYAN="\[$(tput setaf 38)\]"
+    FG_GREEN="\[$(tput setaf 28)\]"
+    FG_DARK="\[$(tput setaf 254)\]"
+    FG_REALDARK="\[$(tput setaf 15)\]"
 
-    BG_YELLOW="\[$(tput setab 3)\]"
-    BG_ORANGE="\[$(tput setab 9)\]"
-    BG_RED="\[$(tput setab 1)\]"
-    BG_MAGENTA="\[$(tput setab 5)\]"
-    BG_VIOLET="\[$(tput setab 13)\]"
-    BG_BLUE="\[$(tput setab 4)\]"
-    BG_CYAN="\[$(tput setab 6)\]"
-    BG_GREEN="\[$(tput setab 2)\]"
+    FG_DARK_SEP="\[$(tput setaf 236)\]"
+    FG_EXIT_SEP="\[$(tput setaf 220)\]"
+
+    BG_YELLOW="\[$(tput setab 227)\]"
+    BG_ORANGE="\[$(tput setab 208)\]"
+    BG_RED="\[$(tput setab 88)\]"
+    BG_MAGENTA="\[$(tput setab 54)\]"
+    BG_VIOLET="\[$(tput setab 63)\]"
+    BG_BLUE="\[$(tput setab 26)\]"
+    BG_CYAN="\[$(tput setab 38)\]"
+    BG_GREEN="\[$(tput setab 29)\]"
+    BG_DARK="\[$(tput setab 236)\]"
+    BG_REALDARK="\[$(tput setab 232)\]"
 
     DIM="\[$(tput dim)\]"
     REVERSE="\[$(tput rev)\]"
     RESET="\[$(tput sgr0)\]"
     BOLD="\[$(tput bold)\]"
 
+    __set_sep_color() {
+        [ -z "$(which git)" ] && return    # no git command found
+
+        # try to get current branch or or SHA1 hash for detached head
+        local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)"
+        if [ -z "$branch" ]; then 
+            FG_EXIT_SEP=$FG_DARK_SEP
+            return
+        fi
+
+        FG_EXIT_SEP=$FG_BLUE
+
+    }
+
     __git_branch() { 
         [ -z "$(which git)" ] && return    # no git command found
 
         # try to get current branch or or SHA1 hash for detached head
         local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)"
-        [ -z "$branch" ] && return  # not a git branch
+        [ -z "$branch" ] && return
 
         local marks
 
@@ -79,8 +102,10 @@ __powerline() {
         fi
 
         # print the git branch segment without a trailing newline
-        printf " $GIT_BRANCH_SYMBOL$branch$marks "
+        printf "$BG_BLUE$FG_DARK_SEP$SEPARATOR_RIGHT"
+        printf " $BG_BLUE$FG_DARK$GIT_BRANCH_SYMBOL$branch$marks "
     }
+
 
     case "$(uname)" in
         Darwin)
@@ -98,12 +123,17 @@ __powerline() {
         # colors in the prompt accordingly. 
         if [ $? -eq 0 ]; then
             local BG_EXIT="$BG_GREEN"
+            local BG_EXIT_SEP="$BG_GREEN"
         else
             local BG_EXIT="$BG_RED"
+            local BG_EXIT_SEP="$BG_RED"
         fi
 
-        PS1="$BG_BASE1$FG_BASE3 \w $RESET"
-        PS1+="$BG_BLUE$FG_BASE3$(__git_branch)$RESET"
+        __set_sep_color
+
+        PS1="$BG_DARK$FG_DARK \w $RESET"
+        PS1+="$(__git_branch)$RESET"
+        PS1+="$BG_EXIT_SEP$FG_EXIT_SEP$SEPARATOR_RIGHT$RESET"
         PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
     }
 
