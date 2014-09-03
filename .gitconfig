@@ -1,0 +1,14 @@
+[user]
+	name = Michael Pfister
+	email = pfista@gmail.com
+[diff]
+	external = /bin/git-diff-cmd.sh
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[push]
+	default = simple
+[alias]
+    l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    c = commit
+    st = status
