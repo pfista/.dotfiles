@@ -20,6 +20,9 @@ call plug#end()
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 
+au FileType go nmap <leader>k <Plug>(go-doc)
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+
 set modelines=0
 set tabstop=2
 set shiftwidth=2
