@@ -12,6 +12,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
+Plug 'majutsushi/tagbar'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -105,6 +106,7 @@ map <C-h> <C-W>h
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 map <C-n> <Esc>:NERDTreeToggle<CR>
+nmap <C-m> :TagbarToggle<CR>
 
 "Map tab movement
 map <C-U> gT 
