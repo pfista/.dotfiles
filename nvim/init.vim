@@ -93,6 +93,12 @@ nnoremap <leader>x :call ToggleDayNight()<CR>
 " Make NERDTree close when vim when its the only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " make ; map to : so its quicker to save files
 nnoremap ; :
 inoremap <C-a> <Esc>
