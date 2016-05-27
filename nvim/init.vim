@@ -23,6 +23,10 @@ call plug#end()
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
 au FileType go nmap <leader>k <Plug>(go-doc)
 au FileType go nmap <leader>rt <Plug>(go-run-tab)
 
@@ -119,3 +123,12 @@ nmap <C-m> :TagbarToggle<CR>
 "Map tab movement
 map <C-U> gT 
 map <C-I> gt 
+
+" Set up searching
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
