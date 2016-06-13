@@ -13,8 +13,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-rails'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -26,6 +27,8 @@ let g:airline_theme='powerlineish'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPLastMode'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:javascript_enable_domhtmlcss = 1
 
 au FileType go nmap <leader>k <Plug>(go-doc)
 au FileType go nmap <leader>rt <Plug>(go-run-tab)

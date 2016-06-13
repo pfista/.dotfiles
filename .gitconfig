@@ -20,7 +20,7 @@
 [difftool "opendiff"]
     cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
 [core]
-	editor = vim
+	editor = nvim
 [pull]
 	rebase = true
 
