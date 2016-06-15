@@ -11,6 +11,7 @@
     c = commit
     st = status
     co = checkout
+	ctags = !.git/hooks/ctags
 [color]
 	ui = true
 [diff]
@@ -28,3 +29,5 @@
 protocol = https
 
 [credential]
+[init]
+	templatedir = ~/.git_template
