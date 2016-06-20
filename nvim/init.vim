@@ -2,7 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -99,9 +99,6 @@ endfunction
 
 nnoremap <leader>x :call ToggleDayNight()<CR>
 
-" Make NERDTree close when vim when its the only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -120,7 +117,7 @@ map <C-j> <C-W>j
 map <C-h> <C-W>h 
 map <C-k> <C-W>k
 map <C-l> <C-W>l
-map <C-n> <Esc>:NERDTreeToggle<CR>
+map <C-n> <plug>NERDTreeTabsToggle<CR>
 nmap <C-m> :TagbarToggle<CR>
 
 "Map tab movement
