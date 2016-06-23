@@ -16,6 +16,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'wakatime/vim-wakatime'
 
 " Add plugins to &runtimepath
 call plug#end()
