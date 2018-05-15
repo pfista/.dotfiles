@@ -7,11 +7,14 @@
 [push]
 	default = simple
 [alias]
-    l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
-    c = commit
-    st = status
-    co = checkout
-	ctags = !.git/hooks/ctags
+  b = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  ld = "!f() { git log --oneline --format='%h %an %ar %s' $1; }; f"
+  lga = "! git log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  lg = "!git log --color --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  c = commit
+  st = status
+  co = checkout
+  ctags = !.git/hooks/ctags
 [color]
 	ui = true
 [diff]

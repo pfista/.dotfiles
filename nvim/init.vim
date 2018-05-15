@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'chriskempson/base16-vim'
@@ -16,7 +15,10 @@ Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'wakatime/vim-wakatime'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'w0rp/ale'
+Plug 'cloudhead/neovim-fuzzy'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -26,9 +28,10 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-let g:syntastic_javascript_checkers = ['eslint']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:javascript_enable_domhtmlcss = 1
 
 au FileType go nmap <leader>k <Plug>(go-doc)
