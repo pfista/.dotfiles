@@ -16,3 +16,9 @@ ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.config/nvim/init.vim ~/.nvimrc
 mkdir -p ~/.dotfiles/nvim/backup
 ```
+
+install zsh
+install zprezto
+install fzf
+load iterm json config
+
