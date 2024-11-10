@@ -1,16 +1,19 @@
 [user]
-	name = Michael Pfister
-	email = pfista@gmail.com
+	name = mikey
+	email = michael@pfista.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExsLjXCb+y+nIqjCqxGgmibsR8XkPIzjVrPd05IbBcr
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [push]
 	default = simple
+	autoSetupRemote = true
 [alias]
   b = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   ld = "!f() { git log --oneline --format='%h %an %ar %s' $1; }; f"
   lga = "! git log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
   lg = "!git log --color --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  lgs = "!git log --color --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%ad)%Creset %s' --date=short --abbrev-commit --author=pfista"
   c = commit
   st = status
   co = checkout
@@ -25,6 +28,7 @@
     cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
 [core]
 	editor = nvim
+	excludesFile = ~/.gitignore
 [pull]
 	rebase = true
 
@@ -34,3 +38,16 @@ protocol = https
 [credential]
 [init]
 	templatedir = ~/.git_template
+[commit]
+	gpgsign = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

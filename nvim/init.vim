@@ -1,5 +1,6 @@
 call plug#begin('~/.config/nvim/plugged')
 
+
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
@@ -19,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'w0rp/ale'
 Plug 'cloudhead/neovim-fuzzy'
+Plug 'f-person/auto-dark-mode.nvim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -93,11 +95,11 @@ colorscheme molokai
 
 function! ToggleDayNight()
     if &background=="dark"
-				colorscheme solarized
 				let &background="light"
+				colorscheme solarized
     else
-				colorscheme molokai
 				let &background="dark"
+				colorscheme molokai
     endif
 endfunction
 
