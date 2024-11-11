@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'w0rp/ale'
 Plug 'cloudhead/neovim-fuzzy'
+Plug 'jinh0/eyeliner.nvim'
 Plug 'f-person/auto-dark-mode.nvim'
 
 " Add plugins to &runtimepath
@@ -66,7 +67,7 @@ set hlsearch
 set noswapfile
 set nobackup
 
-" Disable arrow keys :)
+" Disale arrow keys :)
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -96,7 +97,7 @@ colorscheme molokai
 function! ToggleDayNight()
     if &background=="dark"
 				let &background="light"
-				colorscheme solarized
+				colorscheme base16-solarized-light
     else
 				let &background="dark"
 				colorscheme molokai
