@@ -220,6 +220,52 @@ EOF
     fi
 fi
 
+# Set up SSH signing if SSH keys exist
+echo ""
+info "Checking SSH signing setup..."
+SSH_KEY_FILE=""
+if [ -f "$HOME/.ssh/id_ed25519.pub" ]; then
+    SSH_KEY_FILE="$HOME/.ssh/id_ed25519.pub"
+elif [ -f "$HOME/.ssh/id_rsa.pub" ]; then
+    SSH_KEY_FILE="$HOME/.ssh/id_rsa.pub"
+elif [ -f "$HOME/.ssh/github.pub" ]; then
+    SSH_KEY_FILE="$HOME/.ssh/github.pub"
+fi
+
+if [ -n "$SSH_KEY_FILE" ]; then
+    success "Found SSH key: $SSH_KEY_FILE"
+    
+    # Create allowed_signers file for SSH signing
+    if [ ! -f "$HOME/.ssh/allowed_signers" ]; then
+        info "Creating ~/.ssh/allowed_signers for SSH commit signing..."
+        SSH_KEY_CONTENT=$(cat "$SSH_KEY_FILE")
+        # Extract email from git config or use a placeholder
+        GIT_EMAIL=$(git config --global user.email 2>/dev/null || echo "your.email@example.com")
+        echo "$GIT_EMAIL $SSH_KEY_CONTENT" > "$HOME/.ssh/allowed_signers"
+        success "Created allowed_signers file"
+    fi
+    
+    # Add key to SSH agent if not already added
+    if command_exists ssh-add; then
+        SSH_KEY_PRIVATE="${SSH_KEY_FILE%.pub}"
+        if [ -f "$SSH_KEY_PRIVATE" ]; then
+            info "Adding SSH key to agent..."
+            ssh-add --apple-use-keychain "$SSH_KEY_PRIVATE" 2>/dev/null || ssh-add "$SSH_KEY_PRIVATE" 2>/dev/null || true
+        fi
+    fi
+    
+    echo ""
+    warn "IMPORTANT: To use SSH commit signing on GitHub:"
+    warn "  1. Copy your public key: cat $SSH_KEY_FILE | pbcopy"
+    warn "  2. Go to: https://github.com/settings/keys"
+    warn "  3. Click 'New SSH Key' and select 'Signing Key'"
+    warn "  4. Paste and save"
+    warn "  5. Update ~/.gitconfig.local with your signing key path:"
+    warn "     signingkey = $SSH_KEY_FILE"
+else
+    warn "No SSH key found. Generate one with: ssh-keygen -t ed25519 -C \"your.email@example.com\""
+fi
+
 # Symlink eslint config
 if [ -f "$DOTFILES_DIR/.eslintrc" ]; then
     safe_symlink "$DOTFILES_DIR/.eslintrc" "$HOME/.eslintrc"
