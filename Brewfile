@@ -32,8 +32,10 @@ brew "tmux"
 # Optional: fonts (if using homebrew cask)
 # cask "font-hack-nerd-font"
 
-# macOS Applications (optional)
-# cask "iterm2"
-# cask "visual-studio-code"
-# cask "docker"
+# macOS Applications
+cask "brave-browser"
+cask "cursor"
+cask "iterm2"
+cask "raycast"
+cask "slack"
 
