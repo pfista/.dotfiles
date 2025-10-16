@@ -47,6 +47,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+# Key bindings for history navigation
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
+
 # Modern CLI tools (if installed)
 if command -v eza &> /dev/null; then
   alias ls='eza -l'
