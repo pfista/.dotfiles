@@ -41,6 +41,7 @@ alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph'
 alias gd='git diff'
+alias pr='gh pr create --draft --body "" --title'
 
 # Navigation
 alias ..='cd ..'

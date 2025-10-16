@@ -19,6 +19,7 @@ brew "eza"
 brew "node"
 brew "python"
 brew "git-lfs"
+brew "gh"
 
 # Modern CLI tools
 brew "bat"
