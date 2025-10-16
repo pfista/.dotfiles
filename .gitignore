@@ -1,2 +1,45 @@
+# Vim/Neovim
 plugged/
 .netrwhist
+nvim/backup/
+nvim/lazy/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Local configuration files
+.gitconfig.local
+.zshrc.local
+.bashrc.local
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Build outputs
+dist/
+build/
+*.o
+*.out

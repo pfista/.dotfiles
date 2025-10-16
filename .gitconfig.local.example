@@ -1,0 +1,19 @@
+# .gitconfig.local.example
+# Copy this file to ~/.gitconfig.local and fill in your information
+# This file should NOT be committed to version control
+
+[user]
+	name = Your Name
+	email = your.email@example.com
+	signingkey = your-signing-key-here
+
+# Optional: GPG signing with 1Password (uncomment if you have 1Password installed)
+# [gpg]
+#   format = ssh
+# [gpg "ssh"]
+#   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+# Optional: custom aliases
+[alias]
+	# Add your personal git aliases here
+

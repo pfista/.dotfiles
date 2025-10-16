@@ -1,7 +1,5 @@
-[user]
-	name = mikey
-	email = michael@pfista.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExsLjXCb+y+nIqjCqxGgmibsR8XkPIzjVrPd05IbBcr
+# User information should be in ~/.gitconfig.local
+# See .gitconfig.local.example for template
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
@@ -29,6 +27,20 @@
 [core]
 	editor = nvim
 	excludesFile = ~/.gitignore
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = diff3
+
 [pull]
 	rebase = true
 
@@ -41,13 +53,15 @@ protocol = https
 [commit]
 	gpgsign = true
 
-[gpg]
-  format = ssh
+# GPG signing configuration should be in ~/.gitconfig.local
+# See .gitconfig.local.example for 1Password SSH signing setup
 
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+# Include local configuration (user info, machine-specific settings)
+[include]
+  path = ~/.gitconfig.local

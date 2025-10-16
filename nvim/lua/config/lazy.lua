@@ -16,8 +16,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup mapleader before loading plugins
--- vim.g.mapleader = " "
--- vim.g.maplocalleader = "\\"
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -40,32 +40,30 @@ require("lazy").setup({
     { "tpope/vim-rhubarb" },
     { "w0rp/ale" },
     { "cloudhead/neovim-fuzzy" },
-    { "f-person/auto-dark-mode.nvim" },
     { "folke/tokyonight.nvim" },
     {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      }
     },
     {
-	  "f-person/auto-dark-mode.nvim",
-	  opts = {
-	    update_interval = 1000,
-	    set_dark_mode = function()
-	      vim.api.nvim_set_option_value("background", "dark", {})
-	      vim.cmd("colorscheme tokyonight")
-	    end,
-	    set_light_mode = function()
-	      vim.api.nvim_set_option_value("background", "light", {})
-	      vim.cmd("colorscheme base16-default-light")
-	    end,
-	  },
-	},
+      "f-person/auto-dark-mode.nvim",
+      opts = {
+        update_interval = 1000,
+        set_dark_mode = function()
+          vim.api.nvim_set_option_value("background", "dark", {})
+          vim.cmd("colorscheme tokyonight")
+        end,
+        set_light_mode = function()
+          vim.api.nvim_set_option_value("background", "light", {})
+          vim.cmd("colorscheme base16-default-light")
+        end,
+      },
+    },
   },
   -- Set colorscheme during installation
   -- install = { colorscheme = { "tokyonight", "habamax" } },
