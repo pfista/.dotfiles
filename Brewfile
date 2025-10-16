@@ -2,7 +2,7 @@
 # Install all with: brew bundle
 
 # Cask applications directory
-cask_args appdir: "~/Applications"
+cask_args appdir: "/Applications"
 
 # Essentials
 brew "zsh"
@@ -39,4 +39,5 @@ cask "cursor"
 cask "iterm2"
 cask "raycast"
 cask "slack"
-
+cask "cleanshot"
+cask "spotify"
