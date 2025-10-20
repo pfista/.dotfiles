@@ -77,3 +77,6 @@ if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
 
+alias python=python3
+alias pip="python3 -m pip"
+export PATH="/Users/pfista/Library/Python/3.14/bin:$PATH"
