@@ -23,6 +23,16 @@ shell-integration = zsh
 cursor-style = block
 cursor-style-blink = false
 
+# Splits
+split-divider-color = light:#d0d6e1,dark:#1e1e22
+
+# Resize
+resize-overlay = never
+
+# Links
+link-url = true
+link-previews = true
+
 # Scrollback
 scrollback-limit = 10000
 
