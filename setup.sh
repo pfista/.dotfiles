@@ -39,17 +39,22 @@ command_exists() {
 safe_symlink() {
     local source="$1"
     local target="$2"
-    
+
     if [ -L "$target" ]; then
-        info "Symlink already exists: $target"
-        return 0
-    fi
-    
-    if [ -e "$target" ]; then
+        local current_target
+        current_target=$(readlink "$target")
+        if [ "$current_target" = "$source" ]; then
+            info "Symlink already correct: $target"
+            return 0
+        else
+            warn "Symlink exists but points to $current_target, updating..."
+            rm "$target"
+        fi
+    elif [ -e "$target" ]; then
         warn "File exists: $target. Creating backup..."
         mv "$target" "${target}.backup.$(date +%Y%m%d_%H%M%S)"
     fi
-    
+
     ln -s "$source" "$target"
     success "Created symlink: $target -> $source"
 }
@@ -147,11 +152,10 @@ if [ ! -d "$ZPREZTO_DIR" ]; then
         target_file="${ZDOTDIR:-$HOME}/.$(basename "$rcfile")"
         
         # Check if our dotfiles repo has its own version of this file
-        dotfiles_version="$DOTFILES_DIR/.$(basename "$rcfile")"
-        
-        if [ -f "$dotfiles_version" ]; then
-            # Use our custom version instead of Prezto's default
-            info "Skipping $target_file (using custom version from dotfiles)"
+        # Files live in zsh/ without the dot prefix (e.g., zsh/zshrc not .zshrc)
+        basename_nodot="$(basename "$rcfile")"
+        if [ -f "$DOTFILES_DIR/zsh/$basename_nodot" ]; then
+            info "Skipping $target_file (custom version in dotfiles/zsh/)"
             continue
         fi
         
@@ -362,21 +366,64 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 echo ""
+info "Step 9: Installing Claude Code CLI..."
+if ! command_exists claude; then
+    info "Installing Claude Code via official installer..."
+    curl -fsSL https://claude.ai/install.sh | bash
+    success "Claude Code CLI installed"
+else
+    success "Claude Code CLI already installed"
+fi
+
+echo ""
+info "Step 10: Final touches..."
+
+# Suppress "Last login" message in new terminal sessions
+touch "$HOME/.hushlogin"
+success "Created ~/.hushlogin (suppresses 'Last login' message)"
+
+# Create ~/.zshrc.local template if it doesn't exist
+if [ ! -f "$HOME/.zshrc.local" ]; then
+    cat > "$HOME/.zshrc.local" << 'EOF'
+# Machine-specific shell config
+# This file is sourced at the end of ~/.zshrc
+# It is NOT version-controlled — edit freely for this machine
+
+# Example: Docker via Colima
+# export DOCKER_HOST=unix://$HOME/.colima/default/docker.sock
+
+# Example: Machine-specific aliases
+# alias ol='ollama run deepseek-r1:8b'
+EOF
+    success "Created ~/.zshrc.local template"
+fi
+
+echo ""
 echo "======================================"
 success "Dotfiles setup complete!"
 echo "======================================"
 echo ""
-info "Next steps:"
-echo "  1. Edit ~/.gitconfig.local with your personal information"
-echo "  2. Restart your terminal or run: source ~/.zshrc"
-echo "  3. Open nvim and let lazy.nvim install plugins"
-echo "  4. Try Ghostty as your terminal (config at ~/.config/ghostty/config)"
+echo "--------------------------------------"
+warn "ACTION REQUIRED: Update these files for this machine"
+echo "--------------------------------------"
 echo ""
-info "Optional customizations:"
-echo "  - Create ~/.zshrc.local for machine-specific shell config"
-echo "  - Install additional tools: brew bundle (uses Brewfile)"
-echo "  - Review IMPROVEMENTS.md for additional recommendations"
+warn "1. ~/.gitconfig.local"
+echo "   Set your name, email, and 1Password SSH signing key."
+echo "   Template has been copied from .gitconfig.local.example."
+echo "   Edit with: nvim ~/.gitconfig.local"
 echo ""
-warn "Note: Some changes may require logging out and back in."
+warn "2. ~/.zshrc.local"
+echo "   Add machine-specific shell config (Docker host, local aliases, etc.)."
+echo "   A starter template has been created."
+echo "   Edit with: nvim ~/.zshrc.local"
+echo ""
+warn "3. 1Password"
+echo "   Open 1Password > Settings > Developer > Enable SSH Agent."
+echo "   This is required for git commit signing and SSH auth."
+echo ""
+info "Everything else is ready:"
+echo "  - Restart your terminal or run: source ~/.zshrc"
+echo "  - Open nvim and let lazy.nvim install plugins"
+echo "  - Ghostty is configured at ~/.config/ghostty/config"
 echo ""
 

@@ -58,9 +58,6 @@
 [pull]
 	rebase = true
 
-[hub]
-protocol = https
-
 [credential]
 [init]
 	templatedir = ~/.git_template

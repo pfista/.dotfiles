@@ -5,8 +5,8 @@
 font-family = Hack Nerd Font
 font-size = 14
 
-# Theme
-theme = GruvboxDark
+# Theme — auto-switches with macOS appearance
+theme = light:Monokai Pro Light,dark:Mathias
 
 # Window
 window-padding-x = 8

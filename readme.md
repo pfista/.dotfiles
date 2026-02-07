@@ -1,105 +1,88 @@
 # Dotfiles
 
-My personal dotfiles for macOS development environment with Neovim, Zsh, and iTerm2.
+Personal dotfiles for macOS development. Zsh + Prezto, Neovim, Ghostty.
 
-## Features
-
-- **Shell**: Zsh with Prezto framework
-- **Editor**: Neovim with lazy.nvim plugin manager
-- **Terminal**: iTerm2 with custom profiles and color schemes
-- **Tools**: FZF, Git aliases, and more
-- **Fonts**: Hack Nerd Font included
-
-## Quick Setup
+## Setup
 
 ```bash
-# Clone the repo to your home directory
-cd ~
-git clone git@github.com:pfista/.dotfiles.git
-
-# Run the setup script
-cd ~/.dotfiles
-./setup.sh
+git clone git@github.com:pfista/.dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && ./setup.sh
 ```
 
-The setup script will automatically:
-- Install Homebrew (if not present)
-- Install required packages via Brewfile (zsh, neovim, fzf, git, node, ripgrep, etc.)
-- Set up Zsh and Prezto (from forked repo: `pfista/prezto`)
-- Create symlinks for all configuration files
-- Set up Neovim with lazy.nvim
-- Install Hack Nerd Fonts
-- Create `.gitconfig.local` from template
-- Provide instructions for iTerm2 configuration
+The script handles everything: Homebrew, packages, Prezto, symlinks, Neovim, fonts, Ghostty, Claude Code CLI. At the end it prints the 3 things you need to configure manually.
 
-## Manual Setup (if preferred)
+## Post-Setup (manual)
 
-### Core Dotfiles
+These files are created by the setup script but need your info:
 
-```bash
-ln -s ~/.dotfiles/bash/bash_profile ~/.bash_profile
-ln -s ~/.dotfiles/bash/bashrc ~/.bashrc
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.gitignore ~/.gitignore
-ln -s ~/.dotfiles/.eslintrc ~/.eslintrc
-```
+1. **`~/.gitconfig.local`** — your name, email, and 1Password SSH signing key
+2. **`~/.zshrc.local`** — machine-specific shell config (Docker host, local aliases, etc.)
+3. **1Password** — open the app, go to Settings > Developer > enable SSH Agent
 
-### Neovim
+## What's Included
 
-```bash
-ln -s ~/.dotfiles/nvim ~/.config/nvim
-mkdir -p ~/.dotfiles/nvim/backup
-```
+### Shell (Zsh + Prezto)
 
-### Zsh
+- [Prezto](https://github.com/pfista/prezto) fork with vi-mode, git, syntax-highlighting, autosuggestions
+- [fzf](https://github.com/junegunn/fzf) for fuzzy file/history search + [fzf-tab](https://github.com/Aloxaf/fzf-tab) for fuzzy completions
+- [zoxide](https://github.com/ajeetdsouza/zoxide) — smart `cd` (`z proj` jumps to frecent dirs)
+- [atuin](https://github.com/atuinsh/atuin) — enhanced shell history with ctrl-r TUI
+- [eza](https://github.com/eza-community/eza), [bat](https://github.com/sharkdp/bat), [ripgrep](https://github.com/BurntSushi/ripgrep), [fd](https://github.com/sharkdp/fd), [delta](https://github.com/dandavison/delta) — modern CLI replacements
 
-Requires zprezto to be installed at `~/.zprezto/`.
+### Terminal
 
-```bash
-ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
-ln -sf ~/.dotfiles/zsh/zshenv ~/.zshenv
-ln -sf ~/.dotfiles/zsh/zprofile ~/.zprofile
-ln -sf ~/.dotfiles/zsh/zlogin ~/.zlogin
-ln -sf ~/.dotfiles/zsh/zpreztorc ~/.zpreztorc
-```
+- **[Ghostty](https://ghostty.org/)** — GPU-accelerated, native macOS terminal. Config at `ghostty/config`.
+  Auto-switches theme with system dark/light mode (Mathias dark, Monokai Pro Light).
+- iTerm2 profiles and color schemes also included (legacy)
 
-### iTerm2 (macOS)
+### Editor
 
-1. Open iTerm2 preferences
-2. Go to Profiles → Other Actions → Import JSON Profiles
-3. Select `~/.dotfiles/iterm2-profile.json`
-4. Import color schemes from `color.itermcolors` or `snazzy.itermcolors`
+- Neovim with [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
+- Config in `nvim/lua/`
 
-## Post-Installation
+### Git
 
-1. Restart your terminal or run `source ~/.zshrc`
-2. Open `nvim` and lazy.nvim will automatically install plugins
-3. Review and update `~/.gitconfig` with your personal information
-4. Configure iTerm2 with the provided profiles
+- Delta for side-by-side diffs
+- 1Password SSH commit signing (template in `.gitconfig.local.example`)
+- Custom aliases: `git s <branch>` (smart switch/create), `git lg`, `git b` (branches by date)
+
+### Dev Tools (via Brewfile)
+
+fnm (Node), pyenv (Python), rbenv (Ruby/CocoaPods), pnpm, deno, gh
 
 ## Structure
 
 ```
 .dotfiles/
-├── bash/                    # Bash configuration files
-├── zsh/                     # Zsh/Prezto runcoms
-├── nvim/                    # Neovim configuration
-│   ├── lua/                 # Lua configuration
-│   └── colors/              # Color schemes
-├── fonts/                   # Hack Nerd Font
-├── setup.sh                 # Automated setup script
-├── .gitconfig               # Git configuration (shared)
-├── .gitconfig.local.example # Template for personal git config
-├── .gitignore               # Global gitignore
-├── .eslintrc                # ESLint configuration
-├── .editorconfig            # EditorConfig for consistent coding styles
-├── Brewfile                 # Homebrew dependencies
-└── *.itermcolors            # iTerm2 color schemes
+├── zsh/                      # Zsh runcoms (zshrc, zpreztorc, zshenv, etc.)
+├── nvim/                     # Neovim config
+├── ghostty/                  # Ghostty terminal config
+├── bash/                     # Bash config (fallback)
+├── fonts/                    # Hack Nerd Font
+├── setup.sh                  # Automated setup script
+├── Brewfile                  # Homebrew dependencies
+├── .gitconfig                # Git config (shared)
+├── .gitconfig.local.example  # Template for machine-specific git config
+├── .zshrc.local.example      # Template for machine-specific shell config
+├── .gitignore                # Global gitignore
+├── .editorconfig             # EditorConfig
+└── .eslintrc                 # ESLint config
 ```
+
+## Machine-Specific Files
+
+These files live in `$HOME` only (not symlinked, not version-controlled):
+
+| File | Purpose | Created by |
+|------|---------|------------|
+| `~/.gitconfig.local` | Name, email, signing key | `setup.sh` (from template) |
+| `~/.zshrc.local` | Docker host, local aliases | `setup.sh` (starter template) |
+| `~/.hushlogin` | Suppresses "Last login" message | `setup.sh` |
 
 ## Customization
 
-- **Shell aliases**: Edit `zsh/zshrc`
-- **Git aliases**: Edit `.gitconfig`
-- **Neovim config**: Edit `nvim/lua/config/`
-- **Neovim plugins**: Edit `nvim/lua/plugins/`
+- **Shell aliases**: `zsh/zshrc` (shared) or `~/.zshrc.local` (machine-specific)
+- **Git config**: `.gitconfig` (shared) or `~/.gitconfig.local` (machine-specific)
+- **Ghostty**: `ghostty/config`
+- **Neovim plugins**: `nvim/lua/plugins/`
+- **Brew packages**: `Brewfile`

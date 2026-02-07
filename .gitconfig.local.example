@@ -5,15 +5,13 @@
 [user]
 	name = Your Name
 	email = your.email@example.com
-	signingkey = your-signing-key-here
+	# Set to your SSH key path — 1Password provides this via the SSH agent
+	signingkey = ssh-ed25519 YOUR_PUBLIC_KEY_HERE
 
-# Optional: GPG signing with 1Password (uncomment if you have 1Password installed)
-# [gpg]
-#   format = ssh
-# [gpg "ssh"]
-#   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
-# Optional: custom aliases
-[alias]
-	# Add your personal git aliases here
+# 1Password SSH commit signing
+# Requires: 1Password desktop app with SSH agent enabled
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 

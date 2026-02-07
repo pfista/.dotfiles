@@ -15,6 +15,7 @@ brew "ripgrep"
 brew "fd"
 brew "eza"
 brew "zoxide"
+brew "fzf-tab"
 
 # Development tools
 brew "fnm"
@@ -41,6 +42,7 @@ brew "tmux"
 # cask "font-hack-nerd-font"
 
 # macOS Applications
+cask "1password"
 cask "brave-browser"
 cask "cursor"
 cask "ghostty"

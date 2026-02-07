@@ -1,0 +1,17 @@
+# .zshrc.local.example
+# Copy this file to ~/.zshrc.local for machine-specific shell config
+# This file is sourced at the end of ~/.zshrc
+# It is NOT version-controlled — edit freely for this machine
+
+# Deno completions (if deno is installed)
+# if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then
+#   export FPATH="$HOME/.zsh/completions:$FPATH"
+# fi
+
+# Docker via Colima
+# export DOCKER_HOST=unix://$HOME/.colima/default/docker.sock
+
+# Machine-specific aliases
+# alias ip='dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | xargs | tee >(pbcopy)'
+# alias ol='ollama run deepseek-r1:8b'
+# alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
