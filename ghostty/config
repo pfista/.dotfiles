@@ -1,0 +1,37 @@
+# Ghostty terminal configuration
+# Docs: https://ghostty.org/docs/config
+
+# Font
+font-family = Hack Nerd Font
+font-size = 14
+
+# Theme
+theme = GruvboxDark
+
+# Window
+window-padding-x = 8
+window-padding-y = 4
+window-decoration = true
+macos-titlebar-style = tabs
+
+# Behavior
+copy-on-select = clipboard
+confirm-close-surface = false
+shell-integration = zsh
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Scrollback
+scrollback-limit = 10000
+
+# Keybindings
+keybind = super+t=new_tab
+keybind = super+w=close_surface
+keybind = super+shift+enter=new_split:right
+keybind = super+shift+minus=new_split:down
+keybind = super+alt+left=goto_split:left
+keybind = super+alt+right=goto_split:right
+keybind = super+alt+up=goto_split:top
+keybind = super+alt+down=goto_split:bottom

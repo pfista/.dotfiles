@@ -81,6 +81,14 @@ if [ -f "$DOTFILES_DIR/Brewfile" ]; then
     cd "$DOTFILES_DIR"
     brew bundle
     success "All Brewfile packages installed"
+
+    # Set up default Node.js via fnm
+    if command_exists fnm; then
+        info "Setting up Node.js via fnm..."
+        fnm install 20
+        fnm default 20
+        success "Node.js 20 set as default via fnm"
+    fi
 else
     info "Installing essential packages individually..."
     packages=(
@@ -183,13 +191,11 @@ echo ""
 info "Step 5: Creating symlinks for dotfiles..."
 
 # Symlink zsh files
-if [ -f "$DOTFILES_DIR/.zshrc" ]; then
-    safe_symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-fi
-
-if [ -f "$DOTFILES_DIR/.zshenv" ]; then
-    safe_symlink "$DOTFILES_DIR/.zshenv" "$HOME/.zshenv"
-fi
+safe_symlink "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
+safe_symlink "$DOTFILES_DIR/zsh/zshenv" "$HOME/.zshenv"
+safe_symlink "$DOTFILES_DIR/zsh/zprofile" "$HOME/.zprofile"
+safe_symlink "$DOTFILES_DIR/zsh/zlogin" "$HOME/.zlogin"
+safe_symlink "$DOTFILES_DIR/zsh/zpreztorc" "$HOME/.zpreztorc"
 
 # Symlink bash files
 safe_symlink "$DOTFILES_DIR/bash/bash_profile" "$HOME/.bash_profile"
@@ -290,6 +296,10 @@ mkdir -p "$CONFIG_DIR"
 # Symlink nvim config
 safe_symlink "$DOTFILES_DIR/nvim" "$CONFIG_DIR/nvim"
 
+# Symlink Ghostty config
+mkdir -p "$CONFIG_DIR/ghostty"
+safe_symlink "$DOTFILES_DIR/ghostty/config" "$CONFIG_DIR/ghostty/config"
+
 # Create backup directory
 mkdir -p "$DOTFILES_DIR/nvim/backup"
 success "Created nvim backup directory"
@@ -326,7 +336,10 @@ if [ -d "$DOTFILES_DIR/fonts/Hack" ]; then
 fi
 
 echo ""
-info "Step 8: iTerm2 Configuration..."
+info "Step 8: Terminal Configuration..."
+info "Ghostty config has been symlinked to ~/.config/ghostty/config"
+info "You can launch Ghostty as your primary terminal emulator."
+echo ""
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -f "$DOTFILES_DIR/iterm2-profile.json" ]; then
         info "iTerm2 profile found at: $DOTFILES_DIR/iterm2-profile.json"
@@ -357,7 +370,7 @@ info "Next steps:"
 echo "  1. Edit ~/.gitconfig.local with your personal information"
 echo "  2. Restart your terminal or run: source ~/.zshrc"
 echo "  3. Open nvim and let lazy.nvim install plugins"
-echo "  4. Configure iTerm2 with the provided profiles (macOS)"
+echo "  4. Try Ghostty as your terminal (config at ~/.config/ghostty/config)"
 echo ""
 info "Optional customizations:"
 echo "  - Create ~/.zshrc.local for machine-specific shell config"
