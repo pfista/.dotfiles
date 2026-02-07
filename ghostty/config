@@ -24,7 +24,6 @@ cursor-style = block
 cursor-style-blink = false
 
 # Splits
-split-divider-color = light:#d0d6e1,dark:#1e1e22
 
 # Resize
 resize-overlay = never
