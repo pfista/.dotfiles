@@ -21,8 +21,7 @@ alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 alias pr='gh pr create --draft --body "" --title'
 export GOPATH=$HOME/src/go
 export KEYTIMEOUT=1
-# Use vim cli mode
-bindkey -v 
+# Custom vi-mode keybinding overrides (Prezto editor module handles base vi mode)
 bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^?' backward-delete-char
@@ -33,28 +32,25 @@ bindkey '^r' history-incremental-search-backward
 PATH=$PATH:$GOPATH/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export DOCKER_HOST=unix:///Users/pfista/.colima/default/docker.sock
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+eval "$(fnm env --use-on-cd)"
 # pnpm
 export PNPM_HOME="/Users/pfista/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
-#
-# Github Copilot Labs CLI
-# eval "$(github-copilot-cli alias -- "$0")"
 export GPG_TTY=$(tty)
 # For 1password SSH auth agent
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-# Pyenv
+# Pyenv (lazy-loaded for faster startup)
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# Created by `pipx` on 2024-09-18 16:25:54
-export PATH="$PATH:/Users/pfista/.local/bin"
+
+pyenv() {
+  unfunction pyenv
+  eval "$(command pyenv init -)"
+  pyenv "$@"
+}
 . "/Users/pfista/.deno/env"
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
