@@ -1,0 +1,6 @@
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(rbenv init -)"
+
+# Created by `pipx` on 2024-09-18 16:25:54
+export PATH="$PATH:/Users/pfista/.local/bin"

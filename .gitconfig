@@ -16,6 +16,20 @@
   st = status
   co = checkout
   ctags = !.git/hooks/ctags
+  lm = "!git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative main..$(git symbolic-ref --short HEAD)"
+  p = "pull"
+  s = "!f() { \
+  if [ -z \"$1\" ]; then echo 'usage: git s <branch-name>'; exit 1; fi; \
+  if git show-ref --verify --quiet refs/heads/$1; then \
+    git switch \"$1\"; \
+  elif git show-ref --verify --quiet refs/remotes/origin/$1; then \
+    git switch -c \"$1\" --track origin/\"$1\"; \
+  else \
+    git fetch origin --prune; \
+    git switch main && git pull --ff-only --no-rebase; \
+    git switch -c \"$1\" main; \
+  fi; \
+}; f"
 [color]
 	ui = true
 [diff]

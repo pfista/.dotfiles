@@ -51,6 +51,18 @@ ln -s ~/.dotfiles/nvim ~/.config/nvim
 mkdir -p ~/.dotfiles/nvim/backup
 ```
 
+### Zsh
+
+Requires zprezto to be installed at `~/.zprezto/`.
+
+```bash
+ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/zsh/zshenv ~/.zshenv
+ln -sf ~/.dotfiles/zsh/zprofile ~/.zprofile
+ln -sf ~/.dotfiles/zsh/zlogin ~/.zlogin
+ln -sf ~/.dotfiles/zsh/zpreztorc ~/.zpreztorc
+```
+
 ### iTerm2 (macOS)
 
 1. Open iTerm2 preferences
@@ -70,12 +82,12 @@ mkdir -p ~/.dotfiles/nvim/backup
 ```
 .dotfiles/
 ├── bash/                    # Bash configuration files
+├── zsh/                     # Zsh/Prezto runcoms
 ├── nvim/                    # Neovim configuration
 │   ├── lua/                 # Lua configuration
 │   └── colors/              # Color schemes
 ├── fonts/                   # Hack Nerd Font
 ├── setup.sh                 # Automated setup script
-├── .zshrc                   # Zsh configuration
 ├── .gitconfig               # Git configuration (shared)
 ├── .gitconfig.local.example # Template for personal git config
 ├── .gitignore               # Global gitignore
@@ -87,8 +99,7 @@ mkdir -p ~/.dotfiles/nvim/backup
 
 ## Customization
 
-- **Shell aliases**: Edit `bash/bashrc`
+- **Shell aliases**: Edit `zsh/zshrc`
 - **Git aliases**: Edit `.gitconfig`
 - **Neovim config**: Edit `nvim/lua/config/`
 - **Neovim plugins**: Edit `nvim/lua/plugins/`
-
