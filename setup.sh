@@ -300,9 +300,10 @@ mkdir -p "$CONFIG_DIR"
 # Symlink nvim config
 safe_symlink "$DOTFILES_DIR/nvim" "$CONFIG_DIR/nvim"
 
-# Symlink Ghostty config
+# Symlink Ghostty config and custom themes
 mkdir -p "$CONFIG_DIR/ghostty"
 safe_symlink "$DOTFILES_DIR/ghostty/config" "$CONFIG_DIR/ghostty/config"
+safe_symlink "$DOTFILES_DIR/ghostty/themes" "$CONFIG_DIR/ghostty/themes"
 
 # Create backup directory
 mkdir -p "$DOTFILES_DIR/nvim/backup"

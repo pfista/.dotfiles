@@ -6,7 +6,7 @@ font-family = Hack Nerd Font
 font-size = 14
 
 # Theme — auto-switches with macOS appearance
-theme = light:Monokai Pro Light,dark:Mathias
+theme = light:Nord Light,dark:Nord Black
 
 # Window
 window-padding-x = 8
