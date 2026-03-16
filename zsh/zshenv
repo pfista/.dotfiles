@@ -14,5 +14,5 @@ if [[ -e "${ZDOTDIR:-$HOME}/.zshenv.secret" ]]; then
   source "${ZDOTDIR:-$HOME}/.zshenv.secret"
 fi
 
-export PATH="$PATH:/Users/pfista/.foundry/bin"
-. "$HOME/.cargo/env"
+[[ -d "$HOME/.foundry/bin" ]] && export PATH="$PATH:$HOME/.foundry/bin"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
