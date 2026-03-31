@@ -276,6 +276,17 @@ else
     warn "No SSH key found. Generate one with: ssh-keygen -t ed25519 -C \"your.email@example.com\""
 fi
 
+# Symlink npm config (supply chain security: min release age)
+if [ -f "$DOTFILES_DIR/.npmrc" ]; then
+    safe_symlink "$DOTFILES_DIR/.npmrc" "$HOME/.npmrc"
+fi
+
+# Symlink uv config (supply chain security: exclude-newer)
+mkdir -p "$CONFIG_DIR/uv"
+if [ -f "$DOTFILES_DIR/uv/uv.toml" ]; then
+    safe_symlink "$DOTFILES_DIR/uv/uv.toml" "$CONFIG_DIR/uv/uv.toml"
+fi
+
 # Symlink eslint config
 if [ -f "$DOTFILES_DIR/.eslintrc" ]; then
     safe_symlink "$DOTFILES_DIR/.eslintrc" "$HOME/.eslintrc"

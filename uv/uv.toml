@@ -1,0 +1,3 @@
+# Security: exclude packages published less than 7 days ago.
+# Mitigates supply chain attacks from compromised upstream packages.
+exclude-newer = "7 days"
