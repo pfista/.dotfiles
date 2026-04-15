@@ -13,6 +13,7 @@ alias vi='nvim'
 alias pn='pnpm'
 alias t='turbo'
 alias pr='gh pr create --draft --body "" --title'
+alias gp='git pull'  # override Prezto's gp=git push
 
 # Navigation
 alias ..='cd ..'
