@@ -30,7 +30,7 @@ brew "gh"
 
 # Modern CLI tools
 brew "bat"
-brew "delta"
+brew "git-delta"
 brew "tldr"
 brew "jq"
 brew "atuin"

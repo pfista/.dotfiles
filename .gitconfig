@@ -17,7 +17,7 @@
   co = checkout
   ctags = !.git/hooks/ctags
   lm = "!git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative main..$(git symbolic-ref --short HEAD)"
-  p = "pull"
+  p = "push"
   s = "!f() { \
   if [ -z \"$1\" ]; then echo 'usage: git s <branch-name>'; exit 1; fi; \
   if git show-ref --verify --quiet refs/heads/$1; then \

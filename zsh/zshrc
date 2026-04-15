@@ -13,8 +13,6 @@ alias vi='nvim'
 alias pn='pnpm'
 alias t='turbo'
 alias pr='gh pr create --draft --body "" --title'
-alias python=python3
-alias pip="python3 -m pip"
 
 # Navigation
 alias ..='cd ..'
@@ -97,3 +95,8 @@ command -v atuin &> /dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Machine-specific overrides
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
+
+# Entire CLI shell completion
+autoload -Uz compinit && compinit && source <(entire completion zsh)
