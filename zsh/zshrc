@@ -95,8 +95,3 @@ command -v atuin &> /dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Machine-specific overrides
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
-
-# Entire CLI shell completion
-autoload -Uz compinit && compinit && source <(entire completion zsh)
